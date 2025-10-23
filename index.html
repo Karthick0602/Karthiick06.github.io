@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthick Raghavan | UI/UX Designer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4A44C6;
+            --accent: #FF6584;
+            --dark: #2A2D3E;
+            --light: #F7F9FC;
+            --gray: #8A8D9B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            top: -50%;
+            left: -50%;
+            animation: pulse 15s infinite linear;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .btn:hover {
+            background-color: white;
+            color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .about-text p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .about-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .floating-card {
+            width: 300px;
+            height: 200px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .floating-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .floating-card p {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background-color: #f8f9fa;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 1;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .timeline-content p {
+            color: var(--gray);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            opacity: 1;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-category h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .skill-category h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            width: 0;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-content h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .project-content p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .project-link i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            opacity: 1;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-text h4 {
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        .contact-text p {
+            color: var(--gray);
+        }
+
+        .contact-form {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 20px;
+            }
+            
+            .timeline-item:nth-child(odd)::after {
+                right: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Karthick Raghavan</h1>
+                <p>UI/UX Designer & Creative Developer</p>
+                <a href="#about" class="btn">Explore My Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <p>Versatile UI/UX designer passionate about creating intuitive, visually compelling interfaces</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Creating Digital Experiences That Captivate</h3>
+                    <p>I'm a UI/UX designer driven by a commitment to improving digital usability and accessibility. I deliver experiences that are both functional and delightful, combining design expertise with technical insight.</p>
+                    <p>Currently advancing my technical skills in Java, I bring together design thinking and development knowledge to create innovative, user-focused solutions that solve real problems.</p>
+                    <p>My approach combines aesthetic sensibility with user-centered design principles to create interfaces that not only look beautiful but also provide seamless, intuitive experiences.</p>
+                </div>
+                <div class="about-visual">
+                    <div class="floating-card">
+                        <i class="fas fa-palette"></i>
+                        <p>Design with Purpose</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section" id="timeline">
+        <div class="container">
+            <div class="section-header">
+                <h2>My Journey</h2>
+                <p>Education, certifications, and professional development</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Bachelor of Technology - Information Technology</h3>
+                        <p>K S Rangasamy College of Technology, Namakkal</p>
+                        <p>2025 | CGPA: 77.6%</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Higher Secondary Education</h3>
+                        <p>Gokulanatha Hindu Mahajana Higher Secondary School, Salem</p>
+                        <p>2021 | Percentage: 71.14%</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Secondary School Education</h3>
+                        <p>2019 | Percentage: 62%</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>UI/UX Design Internship</h3>
+                        <p>Quick App Studio</p>
+                        <p>Contributed to UI/UX design projects</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Certifications</h3>
+                        <p>Adobe Illustrator - Beginner to Pro Level (Udemy)</p>
+                        <p>Privacy and Security in Social Media (NPTEL)</p>
+                        <p>Git & GitHub (Coursera)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>Skills & Tools</h2>
+                <p>My technical abilities and design expertise</p>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Programming</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Java</span>
+                            <span>Beginner</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="60"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-paint-brush"></i> Design Tools</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Figma</span>
+                            <span>Proficient</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Adobe Illustrator</span>
+                            <span>Intermediate</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Adobe After Effects</span>
+                            <span>Beginner</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="50"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tasks"></i> Areas of Interest</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>UI/UX Design</span>
+                            <span>Passionate</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Graphic Design</span>
+                            <span>Enthusiastic</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>My Projects</h2>
+                <p>Showcasing my design and development work</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Plant Selling Website</h3>
+                        <p>An e-commerce platform dedicated to plant enthusiasts with intuitive UI and seamless shopping experience.</p>
+                        <a href="https://github.com/karthick02k/Plant-Selling-Website-" class="project-link">
+                            View on GitHub <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>My Trading Coach</h3>
+                        <p>A trading education platform with clean, user-friendly interface designed to help beginners learn trading.</p>
+                        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7199250289512636416/" class="project-link">
+                            View on Figma <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Quick App Studio Projects</h3>
+                        <p>Various UI/UX design projects completed during my internship at Quick App Studio.</p>
+                        <a href="https://www.linkedin.com/posts/karthick-raghavan-2002raghav_uiuxdesign-designinspiration-uxdesign-activity-7195818493311655937-Zvsf?utm_source=share&utm_medium=member_desktop&rcm=ACoAADoh4p4BbDafdltQZvZ8qT1VD-mvwAFqjzI" class="project-link">
+                            View Details <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p>Let's discuss how we can work together</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Location</h4>
+                            <p>334 Ganeshapuram Colony, Vaikalpattarai, Salem-636003</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>+91 9952387097</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>karthickkarthick06072@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>LinkedIn</h4>
+                            <p>Karthick R I LinkedIn</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/karthick-raghavan-2002raghav/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.behance.net/KarthickR02" class="social-link"><i class="fab fa-behance"></i></a>
+            </div>
+            <p>&copy; 2025 Karthick Raghavan. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animation
+        gsap.to(".hero-content h1", {duration: 1, opacity: 1, y: 0, ease: "power2.out"});
+        gsap.to(".hero-content p", {duration: 1, opacity: 1, y: 0, delay: 0.3, ease: "power2.out"});
+        gsap.to(".btn", {duration: 1, opacity: 1, y: 0, delay: 0.6, ease: "power2.out"});
+
+        // About section animation
+        gsap.from(".about-text", {
+            scrollTrigger: {
+                trigger: ".about",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            duration: 1,
+            x: -100,
+            opacity: 0,
+            ease: "power2.out"
+        });
+
+        gsap.from(".floating-card", {
+            scrollTrigger: {
+                trigger: ".about",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            duration: 1,
+            x: 100,
+            opacity: 0,
+            rotationY: 180,
+            ease: "power2.out"
+        });
+
+        // Timeline animations
+        gsap.utils.toArray(".timeline-item").forEach(item => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                duration: 1,
+                x: item.classList.contains("timeline-item") && 
+                   Array.from(item.parentNode.children).indexOf(item) % 2 === 0 ? -100 : 100,
+                opacity: 0,
+                ease: "power2.out"
+            });
+        });
+
+        // Skills animations
+        gsap.utils.toArray(".skill-category").forEach((skill, i) => {
+            gsap.from(skill, {
+                scrollTrigger: {
+                    trigger: skill,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                delay: i * 0.2,
+                ease: "power2.out"
+            });
+        });
+
+        // Project animations
+        gsap.utils.toArray(".project-card").forEach((project, i) => {
+            gsap.from(project, {
+                scrollTrigger: {
+                    trigger: project,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                delay: i * 0.2,
+                ease: "power2.out"
+            });
+        });
+
+        // Contact animations
+        gsap.utils.toArray(".contact-item").forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                duration: 1,
+                x: -50,
+                opacity: 0,
+                delay: i * 0.2,
+                ease: "power2.out"
+            });
+        });
+
+        // Animate skill bars on scroll
+        gsap.utils.toArray(".skill-progress").forEach(bar => {
+            ScrollTrigger.create({
+                trigger: bar,
+                start: "top 80%",
+                onEnter: () => {
+                    gsap.to(bar, {
+                        duration: 1.5,
+                        width: bar.getAttribute("data-width") + "%",
+                        ease: "power2.out"
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Floating card interaction
+        const floatingCard = document.querySelector('.floating-card');
+        floatingCard.addEventListener('mousemove', (e) => {
+            const cardRect = floatingCard.getBoundingClientRect();
+            const cardCenterX = cardRect.left + cardRect.width / 2;
+            const cardCenterY = cardRect.top + cardRect.height / 2;
+            
+            const rotateX = (e.clientY - cardCenterY) / 20;
+            const rotateY = (cardCenterX - e.clientX) / 20;
+            
+            floatingCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        
+        floatingCard.addEventListener('mouseleave', () => {
+            floatingCard.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    </script>
+</body>
+</html>
